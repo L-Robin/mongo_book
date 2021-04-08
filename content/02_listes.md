@@ -114,16 +114,17 @@ Avec les listes, c'est différent. Chacun des éléments est testé un à un, vo
 ```{code-cell}
 :tags: [output_scroll]
 
-db.notes.find({"notes": {$gt: 12, $lte: 10}})
+db.notes.find({"notes": {$gt: 13, $lte: 10}})
 ```
 Cette requête, test pour chaque élément de la liste un à un : 
   - La condition $gt: 12;
-  - La condition $lte: 12;
+  - La condition $lte: 10;
 Si les conditions sont vérifiés aux moins une fois, la liste est renvoyée. 
-
-Ainsi, $y = f(x)$
-
-
+Ainsi, une liste "[11,11,12,8,3,18,15]" donne : 
+  - [F,F,F,F,F,T,T] pour la première condition, 
+  - [F,F,F,T,T,F,F] pour la seconde.
+Les conditions sont toutes respectés au moin une fois, la liste est renvoyée.  
+  
 ## Notes / Brouillon :
 
 Lorsqu'une liste n'existe pas, la condition posée dessus est automatiquement vérifiée.
