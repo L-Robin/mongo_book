@@ -98,13 +98,20 @@ qui commencent par la lettre M:
 ```{code-cell}
 db.notes.find({"nom": {$gte: "M", $lt: "N"}})
 ```
-cette commande, nous renvoie les nom dont la première lettre est $\ge$
-Avec les listes, c'est différent. Chacun des éléments est testé un à un. 
+Cette requête, nous renvoie les nom dont la première lettre est >= à M, et <N. Les chaines de carractères renvoyés on été soumis à deux condition. 
+
+
+Avec les listes, c'est différent. Chacun des éléments est testé un à un, voyons le fonctionnement d'une requête sur une liste avec plusieurs conditions: 
 
 ```{code-cell}
 db.notes.find({"notes": {$gt: 12, $lte: 10}})
 ```
+Cette requête, test pour chaque élément de la liste un à un : 
+  - La condition $gt: 12;
+  - La condition $lte: 12;
+Si les conditions sont vérifiés aux moins une fois, la liste est renvoyée. 
 
+Ainsi, $y = f(x)$
 
 
 ## Notes / Brouillon :
