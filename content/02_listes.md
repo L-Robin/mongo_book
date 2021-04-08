@@ -13,6 +13,8 @@ kernelspec:
   name: imongo
 ---
 
+
+
 # Attributs de type liste
 
 * Auteurs/trices : **Malo REYNES, Lucas ROBIN, Fiona TUFFIN**
@@ -89,6 +91,7 @@ db.notes.find(
 ```
 Cette fois ci, c'est bon, on ne retourne plus que 2 étudiants qui n'ont que des notes au-dessus de 12.
 
+(sec:exec)=
 ## Particularité du travail sur des listes 
 
 Lorsque nous faisons des requêtes sur un attribut d'autre type qu'une liste, un seul élement est soumis à l'ensemble de nos conditions.
@@ -96,6 +99,11 @@ Par exemple, la clé "nom" renvoie une chaine de carractère, qui est un éléme
 qui commencent par la lettre M:
 
 ```{code-cell}
+use food
+```
+```{code-cell}
+:tags: [output_scroll]
+
 db.notes.find({"nom": {$gte: "M", $lt: "N"}})
 ```
 Cette requête, nous renvoie les nom dont la première lettre est >= à M, et <N. Les chaines de carractères renvoyés on été soumis à deux condition. 
@@ -104,6 +112,8 @@ Cette requête, nous renvoie les nom dont la première lettre est >= à M, et <N
 Avec les listes, c'est différent. Chacun des éléments est testé un à un, voyons le fonctionnement d'une requête sur une liste avec plusieurs conditions: 
 
 ```{code-cell}
+:tags: [output_scroll]
+
 db.notes.find({"notes": {$gt: 12, $lte: 10}})
 ```
 Cette requête, test pour chaque élément de la liste un à un : 
