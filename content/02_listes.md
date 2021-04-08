@@ -99,7 +99,7 @@ Par exemple, la clé "nom" renvoie une chaine de carractère, qui est un éléme
 qui commencent par la lettre M:
 
 ```{code-cell}
-use food
+use etudiants
 ```
 ```{code-cell}
 :tags: [output_scroll]
