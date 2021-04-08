@@ -21,6 +21,7 @@ Ce chapitre traite des attributs de type liste et des différents types de requ�
 
 En MongoDB, un document est composé de couples clé/valeur. Une clé peut être considérée comme le nom d'une variable (attribut) à laquelle correspond une valeur pour un individu. L'attribut peut être de plusieurs types : chaîne de caractères, booléen, nombre, liste ou date. C'est aux attributs de type *liste* que nous nous intéressons ici. En MongoDB comme en python, une liste est, comme son nom l'indique, une série de valeurs, ces valeurs pouvant être de tous types. Une liste peut également contenir des sous-listes. Il est possible de réaliser plusieurs opérations sur les listes telles qu'obtenir sa taille, récupérer son minimum, son maximum, sa moyenne et autres. Il faut toutefois faire attention à certains "pièges" que nous exposerons.
  
+
 Les exemples pour cette partie concernent les listes de notes des élèves de la collection notes de la base de données _etudiants_.
 
 Exemple : on veut connaitre les notes de l'étudiant Paul et les sortir sous forme de liste.
@@ -88,6 +89,22 @@ db.notes.find(
 ```
 Cette fois ci, c'est bon, on ne retourne plus que 2 étudiants qui n'ont que des notes au-dessus de 12.
 
+## Particularité du travail sur des listes 
+
+Lorsque nous faisons des requêtes sur un attribut d'autre type qu'une liste, un seul élement est soumis à l'ensemble de nos conditions.
+Par exemple, la clé "nom" renvoie une chaine de carractère, qui est un élément unique, cet élément est soumis à nos deux conditions. Nous voulons les nom
+qui commencent par la lettre M:
+
+```{code-cell}
+db.notes.find({"nom": {$gte: "M", $lt: "N"}})
+```
+cette commande, nous renvoie les nom dont la première lettre est $\ge$
+Avec les listes, c'est différent. Chacun des éléments est testé un à un. 
+
+```{code-cell}
+db.notes.find({"notes": {$gt: 12, $lte: 10}})
+```
+
 
 
 ## Notes / Brouillon :
@@ -98,4 +115,4 @@ Sans le $elemmatch, si les conditions sont vérifiées une à une, que ce soit p
 Avec le $elemmatch, on regarde toutes les notes une par une et on ne retourne le document si et seulement si un élément de la liste est capable de vérifier toutes les conditions à lui tout seul.
 
 Parler de l'attribut $size pour les listes
-Est-ce qu'on s'intéresse à la création de liste en mode création de variables ?
+Est-ce qu'on s'intéresse à la création de liste en mode création de variables ?  $\ge$
